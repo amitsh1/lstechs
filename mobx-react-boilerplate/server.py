@@ -2,7 +2,18 @@
 import os
 from flask import Flask, render_template,jsonify,request
 from pymongo import MongoClient
-app = Flask(__name__,template_folder="build",static_url_path="", static_folder="build")
+from bson import ObjectId
+import json
+class JSONEncoder(json.JSONEncoder):
+    def default(self, o):
+        if isinstance(o, ObjectId):
+            return str(o)
+        return json.JSONEncoder.default(self, o)
+
+
+
+
+app = Flask(__name__,template_folder="",static_url_path="", static_folder="")
 client = MongoClient(
     host="mongo",
     username=os.environ.get("ME_CONFIG_MONGODB_ADMINUSERNAME"),
@@ -15,13 +26,8 @@ def index():
 
 @app.route("/gettodos")
 def gettodos():
-    return jsonify(list(
-        coll.aggregate([
-  { "$match": { } },
-  { "$_id": { "_id": { "$toString": "$_id" } } }
-])
-    ))
-    return jsonify(list(coll.find({},{"_id":False})))
+    return JSONEncoder().encode(list(coll.find()))    
+
 
 
 @app.route("/addtodo",methods=["POST"])

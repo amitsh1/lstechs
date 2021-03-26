@@ -4,6 +4,33 @@ import TodoModel from "./TodoModel";
 
 export default class TodoListModel {
   @observable todos = [];
+  isLoading = true
+  constructor(transportLayer, authorStore) {
+    // makeAutoObservable(this)
+    // this.authorStore = authorStore // Store that can resolve authors.
+    // this.transportLayer = transportLayer // Thing that can make server requests.
+    // this.transportLayer.onReceiveTodoUpdate(updatedTodo =>
+    //     this.updateTodoFromServer(updatedTodo)
+    // )
+    this.loadTodos()
+}
+
+  // Fetches all Todos from the server.
+  loadTodos() {
+      this.isLoading = true
+
+      fetch('/gettodos')
+          .then(response => response.json())
+          .then(response =>{
+            this.todos = response.map(todo=>new TodoModel(todo.title,todo.tasks,todo._id))
+            this.isLoading = false
+          }
+
+          ); 
+      
+
+  }
+
 
   @computed
   get unfinishedTodoCount() {
@@ -12,10 +39,6 @@ export default class TodoListModel {
 
   @action
   addTodo(title,tasks) {
-    // var bla = new TodoModel(title,tasks);
-    // bla.tasks = toJS(tasks)
-    // bla.title = toJS(title)
-    // console.log(title)
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -25,14 +48,14 @@ export default class TodoListModel {
         title:toJS(title)
       }
       ),
-    mode: 'no-cors'
   };
-  fetch('http://0.0.0.0:4000/addtodo',requestOptions)
-      // .then(response => response.json())
-      .then(id =>this.todos.push(
+  fetch('/addtodo',requestOptions)
+      .then(response => response.json())
+      .then(response =>this.todos.push(
 
-        new TodoModel(title,tasks,id)
-      )); 
+        new TodoModel(title,tasks,response.id)
+      )
+      ); 
       // .then(data => this.setState({ postId: data.id }));    
     // this.todos.push();
   }

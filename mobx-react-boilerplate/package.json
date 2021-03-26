@@ -5,6 +5,7 @@
   "scripts": {
     "start": "webpack-dev-server --hot --open --host=0.0.0.0",
     "build": "webpack",
+    "watch":"webpack --watch",
     "lint": "eslint src"
   },
   "repository": {

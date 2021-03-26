@@ -41,7 +41,7 @@ class AddTodoForm extends Component {
 
 
     return (
-        <Form onSubmit={this.handleSubmit}>
+        <Form >
           <Form.Group  widths='equal'>
             <Form.Input
               fluid
@@ -50,7 +50,7 @@ class AddTodoForm extends Component {
               value={this.name}
               onChange={this.handleChange}
             />
-            <Form.Button fluid onClick={this.addtask} content="Add task" />
+            <Button fluid onClick={this.addtask} content="Add task" />
           </Form.Group>
 
           <List divided relaxed>
@@ -64,7 +64,7 @@ class AddTodoForm extends Component {
 
 
           <Form.Group  widths='equal'>
-          <Form.Button content='Submit' />
+          <Form.Button content='Submit' onClick={this.handleSubmit}/>
           </Form.Group>          
         </Form>
     )

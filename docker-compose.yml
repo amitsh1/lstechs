@@ -17,7 +17,7 @@ services:
     ports:
       - 4000:4000
     volumes: 
-      - ./todo:/code      
+      - ./mobx-react-boilerplate:/code      
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
