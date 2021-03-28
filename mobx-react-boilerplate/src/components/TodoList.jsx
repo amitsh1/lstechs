@@ -31,8 +31,6 @@ class TodoList extends React.Component {
             todo={todo} 
             key={todo.id} 
             store={this.props.store}
-            // onchange={this.props.store.editTodo} 
-            // ondelete={this.props.store.deleteTodo}
             />
           ))}
 
@@ -40,12 +38,7 @@ class TodoList extends React.Component {
     </Container>
 
 
-        {/* <ul>
-          {this.props.store.todos.map(todo => (
-            <Todo todo={todo} key={todo.id} />
-          ))}
-        </ul> */}
-        Tasks left: {this.props.store.unfinishedTodoCount}
+        {/* Tasks left: {this.props.store.unfinishedTodoCount} */}
       </div>
     );
   }

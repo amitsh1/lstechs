@@ -10,7 +10,10 @@ import Task from "./Task";
 class AddTodoForm extends Component {
   @observable name = "";  
   @observable email = "";
-  @observable tasks = [];
+  @observable tasks = [        {
+    title:"",
+    finished:false
+}];
   
   addtask = () => {
     this.tasks.push(
@@ -30,7 +33,7 @@ class AddTodoForm extends Component {
         {
             name:this.name,
             email:this.email,
-            tasks:this.tasks
+            tasks:this.tasks.filter(task=>task.title!="")
         }
     )
 
@@ -39,7 +42,7 @@ class AddTodoForm extends Component {
   
   render() {
 
-
+    console.log(this.tasks,'this.tasks')
     return (
         <Form >
           <Form.Group  widths='equal'>
@@ -50,7 +53,10 @@ class AddTodoForm extends Component {
               value={this.name}
               onChange={this.handleChange}
             />
-            <Button fluid onClick={this.addtask} content="Add task" />
+            {
+              this.tasks.slice(-1)[0].title==""?null:<Button fluid onClick={this.addtask} content="Add task" />
+            }
+            
           </Form.Group>
 
           <List divided relaxed>

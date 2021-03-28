@@ -22,7 +22,9 @@ export default class TodoListModel {
       fetch('/gettodos')
           .then(response => response.json())
           .then(response =>{
-            this.todos = response.map(todo=>new TodoModel(todo.title,todo.tasks,todo._id))
+            this.todos = response.map(todo=>new TodoModel(
+              todo._id,todo.title,todo.tasks,todo.date_created,todo.last_update_date
+              ))
             this.isLoading = false
           }
 
@@ -53,7 +55,7 @@ export default class TodoListModel {
       .then(response => response.json())
       .then(response =>this.todos.push(
 
-        new TodoModel(title,tasks,response.id)
+        new TodoModel(response.id,title,tasks,response.date,response.date)
       )
       ); 
       // .then(data => this.setState({ postId: data.id }));    
@@ -75,7 +77,9 @@ export default class TodoListModel {
     };
     fetch('/edittodo',requestOptions)
         .then(response => response.json())
-        .then(response =>console.log("OK")
+        .then(response =>
+          thia.todos.filter((todo)=>todo.id==id).last_update_date = response.last_update_date
+          
         );     
 
   }

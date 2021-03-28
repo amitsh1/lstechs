@@ -2,14 +2,16 @@ import { observable } from "mobx";
 
 export default class TodoModel {
   id;
-  creation_date = new Date().toLocaleString();
-  last_update_date = new Date().toLocaleString();
+  date_created;
+  last_update_date;
   @observable title;
   @observable tasks;
 
-  constructor(title,tasks,id) {
+  constructor(id,title,tasks,date_created,last_update_date) {
     this.title = title;
     this.tasks = tasks;
     this.id = id;
+    this.date_created = date_created;
+    this.last_update_date = last_update_date;
   }
 }

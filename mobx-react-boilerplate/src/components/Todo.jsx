@@ -19,10 +19,11 @@ const Todo = observer(({ todo,store}) => (
   <Item.Content verticalAlign='middle'>
     <Item.Header as='a'>{todo.title}</Item.Header>
     <Item.Meta>    
-      <span>Date</span>
-      <span>Category</span>
-   
+      <span>creation date: {todo.date_created}</span>
     </Item.Meta>
+    <Item.Meta>    
+      <span>last update date: {todo.last_update_date}</span>
+    </Item.Meta>    
     <Item.Description>
     <Form>
     <Form.Group  widths='equal'>
