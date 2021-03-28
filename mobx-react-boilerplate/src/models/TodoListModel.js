@@ -78,7 +78,7 @@ export default class TodoListModel {
     fetch('/edittodo',requestOptions)
         .then(response => response.json())
         .then(response =>
-          thia.todos.filter((todo)=>todo.id==id).last_update_date = response.last_update_date
+          this.todos.filter((todo)=>todo.id==id).last_update_date = response.last_update_date
           
         );     
 

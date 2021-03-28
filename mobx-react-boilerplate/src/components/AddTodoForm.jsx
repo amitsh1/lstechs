@@ -70,7 +70,10 @@ class AddTodoForm extends Component {
 
 
           <Form.Group  widths='equal'>
-          <Form.Button content='Submit' onClick={this.handleSubmit}/>
+            {
+              this.name!=""?<Form.Button content='Add Todo' onClick={this.handleSubmit}/>:null
+            }
+          
           </Form.Group>          
         </Form>
     )

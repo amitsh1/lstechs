@@ -26,7 +26,7 @@ const Todo = observer(({ todo,store}) => (
     </Item.Meta>    
     <Item.Description>
     <Form>
-    <Form.Group  widths='equal'>
+    <Form.Group  inline>
     <Form.Field >
       {todo.tasks.map((task,i) => (
         
