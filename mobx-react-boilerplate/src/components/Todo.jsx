@@ -6,7 +6,8 @@ import {
   Form,
   Item,
   Button, 
-  Icon 
+  Icon,
+  Label
 
 } from 'semantic-ui-react'
 
@@ -14,25 +15,21 @@ import {
 const Todo = observer(({ todo,store}) => (
 
   <Item key={todo.id}>
-  <Item.Content>
+     
+  <Item.Content verticalAlign='middle'>
     <Item.Header as='a'>{todo.title}</Item.Header>
     <Item.Meta>    
       <span>Date</span>
       <span>Category</span>
-      <Button icon onClick={(x)=>{
-        store.deleteTodo(todo.id);
-        store.todos = store.todos.filter(todo_=>todo_.id!=todo.id)      
-      }}>
-        <Icon name='delete' />
-      </Button>        
+   
     </Item.Meta>
     <Item.Description>
     <Form>
-
-
+    <Form.Group  widths='equal'>
+    <Form.Field >
       {todo.tasks.map((task,i) => (
-        <Form.Field key={i}>
-        <Checkbox label={task.title} checked={task.finished} onChange={() => 
+        
+        <Checkbox key={i} label={task.title} checked={task.finished} onChange={() => 
           {
             task.finished = !task.finished;
             store.editTodo(todo.id,todo.tasks);
@@ -40,14 +37,24 @@ const Todo = observer(({ todo,store}) => (
 
           
           } />
-      </Form.Field>
+      
 
       ))}
 
+</Form.Field>
+          </Form.Group>
 
     </Form>      
-      A description which may flow for several lines and give context to the content.
+
     </Item.Description>
+    <Item.Extra>
+    <Button icon onClick={(x)=>{
+        store.deleteTodo(todo.id);
+        store.todos = store.todos.filter(todo_=>todo_.id!=todo.id)      
+      }}>
+        <Icon name='delete' />
+      </Button>  
+        </Item.Extra>    
   </Item.Content>
 </Item>
 
