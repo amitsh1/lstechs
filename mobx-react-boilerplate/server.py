@@ -41,6 +41,33 @@ def addtodo():
     return jsonify(id=str(res.inserted_id),statusCode= 200 )  
 
 
+@app.route("/edittodo",methods=["POST"])
+def edittodo():
+    todo = request.get_json(force=True)
+  
+
+    coll.update(
+    { "_id": ObjectId(todo["id"]) },
+    {
+        "$set": {
+        "tasks": todo["tasks"],
+        }
+    }
+    )
+
+    return jsonify(statusCode= 200 )  
+    
+
+
+@app.route("/deletetodo",methods=["POST"])
+def deletetodo():
+    todo = request.get_json(force=True)
+  
+    coll.delete_many({ "_id": ObjectId(todo["id"]) })
+
+
+    return jsonify(statusCode= 200 )  
+
 
 @app.route("/delete")
 def delete():

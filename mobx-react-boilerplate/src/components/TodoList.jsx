@@ -4,6 +4,16 @@ import { observer } from "mobx-react";
 import AddTodoForm from "./AddTodoForm";
 import Todo from "./Todo";
 
+import {
+  Button,
+  Container,
+  Icon,
+  Image,
+  Item,
+  Label,
+
+} from 'semantic-ui-react'
+
 @observer
 class TodoList extends React.Component {
   @observable newTodoTitle = "";
@@ -12,21 +22,29 @@ class TodoList extends React.Component {
     return (
       <div>
         < AddTodoForm onsubmit={this.handleFormSubmit} />
-        {/* <form onSubmit={this.handleFormSubmit}>
-          New Todo:
-          <input
-            type="text"
-            value={this.newTodoTitle}
-            onChange={this.handleInputChange}
-          />
-          <button type="submit">Add</button>
-        </form> */}
         <hr />
-        <ul>
+
+        <Container>
+      <Item.Group divided>
+      {this.props.store.todos.map((todo) => (
+            <Todo 
+            todo={todo} 
+            key={todo.id} 
+            store={this.props.store}
+            // onchange={this.props.store.editTodo} 
+            // ondelete={this.props.store.deleteTodo}
+            />
+          ))}
+
+      </Item.Group>
+    </Container>
+
+
+        {/* <ul>
           {this.props.store.todos.map(todo => (
             <Todo todo={todo} key={todo.id} />
           ))}
-        </ul>
+        </ul> */}
         Tasks left: {this.props.store.unfinishedTodoCount}
       </div>
     );
@@ -43,6 +61,17 @@ class TodoList extends React.Component {
     // this.newTodoTitle = "";
     // e.preventDefault();
   };
+  @action
+  handleTaskChange = (newtodo) => {
+    console.log(newtodo)
+    // this.props.store.addTodo(newtodo.name,newtodo.tasks);
+    // this.newTodoTitle = "";
+    // e.preventDefault();
+  };
+
+
+
+
 }
 
 export default TodoList;

@@ -59,4 +59,48 @@ export default class TodoListModel {
       // .then(data => this.setState({ postId: data.id }));    
     // this.todos.push();
   }
+
+  @action
+  editTodo(id,tasks) {
+    // console.log(id,toJS(a));
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(
+        {
+          tasks:toJS(tasks),
+          id:id
+        }
+        ),
+    };
+    fetch('/edittodo',requestOptions)
+        .then(response => response.json())
+        .then(response =>console.log("OK")
+        );     
+
+  }
+
+
+  @action
+  deleteTodo(id) {
+    // console.log(id,toJS(a));
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(
+        {
+          id:id
+        }
+        ),
+    };
+    fetch('/deletetodo',requestOptions)
+        .then(response => response.json())
+        .then(response =>console.log("OK")
+        );     
+
+  }  
+
+
+
+
 }
