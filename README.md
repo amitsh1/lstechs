@@ -11,3 +11,19 @@ GET APP:
 
 * sudo yum install git
 * git clone https://github.com/amitsh1/lstechs.git
+
+BUILD JS:
+
+* cd lstechs
+* docker run -it -v ${PWD}/todo:/wrks -w /wrks node npm install
+* docker run -it -v ${PWD}/todo:/wrks -w /wrks node npm run build
+
+BUILD DOCKER:
+
+* docker-compose build
+
+RUN:
+
+* docker-compose up
+
+go to http://localhost:4000
