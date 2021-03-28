@@ -33,7 +33,7 @@ const Todo = observer(({ todo,store}) => (
         <Checkbox key={i} label={task.title} checked={task.finished} onChange={() => 
           {
             task.finished = !task.finished;
-            store.editTodo(todo.id,todo.tasks);
+            store.editTodo(todo);
           }
 
           
@@ -50,7 +50,7 @@ const Todo = observer(({ todo,store}) => (
     </Item.Description>
     <Item.Extra>
     <Button icon onClick={(x)=>{
-        store.deleteTodo(todo.id);
+        store.deleteTodo(todo);
         store.todos = store.todos.filter(todo_=>todo_.id!=todo.id)      
       }}>
         <Icon name='delete' />
@@ -59,14 +59,7 @@ const Todo = observer(({ todo,store}) => (
   </Item.Content>
 </Item>
 
-  // <li>
-  //   <input
-  //     type="checkbox"
-  //     checked={todo.finished}
-  //     onChange={() => (todo.finished = !todo.finished)}
-  //   />
-  //   {todo.title}
-  // </li>
+
 ));
 
 export default Todo;

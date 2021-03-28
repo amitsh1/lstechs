@@ -63,37 +63,36 @@ export default class TodoListModel {
   }
 
   @action
-  editTodo(id,tasks) {
+  editTodo(todo) {
     // console.log(id,toJS(a));
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(
         {
-          tasks:toJS(tasks),
-          id:id
+          tasks:toJS(todo.tasks),
+          id:todo.id
         }
         ),
     };
     fetch('/edittodo',requestOptions)
         .then(response => response.json())
         .then(response =>
-          this.todos.filter((todo)=>todo.id==id).last_update_date = response.last_update_date
-          
+          todo.last_update_date = response.last_update_date
         );     
 
   }
 
 
   @action
-  deleteTodo(id) {
+  deleteTodo(todo) {
     // console.log(id,toJS(a));
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(
         {
-          id:id
+          id:todo.id
         }
         ),
     };

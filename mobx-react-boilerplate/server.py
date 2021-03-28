@@ -61,7 +61,7 @@ def edittodo():
     }
     )
 
-    return jsonify(statusCode= 200 ,last_update_date=last_update_date)  
+    return jsonify(statusCode= 200 ,last_update_date=last_update_date.strftime("%Y-%m-%d %H:%M") )  
     
 
 

@@ -1,29 +1,23 @@
-import React, { Component } from "react";
-import { observable, action,toJS } from "mobx";
+import React from "react";
+import { action } from "mobx";
 import { observer } from "mobx-react";
 import AddTodoForm from "./AddTodoForm";
 import Todo from "./Todo";
 
 import {
-  Button,
   Container,
-  Icon,
-  Image,
   Item,
-  Label,
-
 } from 'semantic-ui-react'
 
 @observer
 class TodoList extends React.Component {
-  @observable newTodoTitle = "";
-
   render() {
     return (
       <div>
         < AddTodoForm onsubmit={this.handleFormSubmit} />
         <hr />
-
+        Number of Tasks: {this.props.store.unfinishedTodoCount}
+        <hr />
         <Container>
       <Item.Group divided>
       {this.props.store.todos.map((todo) => (
@@ -38,28 +32,14 @@ class TodoList extends React.Component {
     </Container>
 
 
-        {/* Tasks left: {this.props.store.unfinishedTodoCount} */}
+       
       </div>
     );
   }
 
   @action
-  handleInputChange = e => {
-    this.newTodoTitle = e.target.value;
-  };
-
-  @action
   handleFormSubmit = (newtodo) => {
     this.props.store.addTodo(newtodo.name,newtodo.tasks);
-    // this.newTodoTitle = "";
-    // e.preventDefault();
-  };
-  @action
-  handleTaskChange = (newtodo) => {
-    console.log(newtodo)
-    // this.props.store.addTodo(newtodo.name,newtodo.tasks);
-    // this.newTodoTitle = "";
-    // e.preventDefault();
   };
 
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Form,Button,List } from 'semantic-ui-react'
-import { observable, action } from "mobx";
+import { Form,Button } from 'semantic-ui-react'
+import { observable } from "mobx";
 import { observer } from "mobx-react";
 
 import Task from "./Task";
@@ -9,11 +9,10 @@ import Task from "./Task";
 @observer
 class AddTodoForm extends Component {
   @observable name = "";  
-  @observable email = "";
-  @observable tasks = [        {
-    title:"",
-    finished:false
-}];
+  @observable tasks = [{
+                        title:"",
+                        finished:false
+                        }];
   
   addtask = () => {
     this.tasks.push(
@@ -32,23 +31,25 @@ class AddTodoForm extends Component {
     this.props.onsubmit(
         {
             name:this.name,
-            email:this.email,
             tasks:this.tasks.filter(task=>task.title!="")
         }
-    )
+    );
+    this.name = "";
+    this.tasks = [{
+      title:"",
+      finished:false
+      }];
 
   }
-//   <Form.Checkbox label='I agree to the Terms and Conditions' />
+
   
   render() {
-
-    console.log(this.tasks,'this.tasks')
     return (
         <Form >
           <Form.Group  widths='equal'>
             <Form.Input
               fluid
-              placeholder='Name'
+              label='Todo Name' 
               name='name'
               value={this.name}
               onChange={this.handleChange}
@@ -59,16 +60,15 @@ class AddTodoForm extends Component {
             
           </Form.Group>
 
-          <List divided relaxed>
+     
+      
           {this.tasks.map(
                 (task,i)=><Task key={i} todo={task} />
             )}                  
     
 
-  </List>          
-      
-
-
+  
+          
           <Form.Group  widths='equal'>
             {
               this.name!=""?<Form.Button content='Add Todo' onClick={this.handleSubmit}/>:null

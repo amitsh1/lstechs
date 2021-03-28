@@ -3,7 +3,7 @@ import { observable } from "mobx";
 export default class TodoModel {
   id;
   date_created;
-  last_update_date;
+  @observable last_update_date;
   @observable title;
   @observable tasks;
 
