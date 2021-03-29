@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { Form,Button } from 'semantic-ui-react'
+import { Form,Button,Grid } from 'semantic-ui-react'
 import { observable } from "mobx";
 import { observer } from "mobx-react";
 
 import Task from "./Task";
 
+import MessageExampleListProp from "./Instruction";
 
 @observer
 class AddTodoForm extends Component {
@@ -59,12 +60,23 @@ class AddTodoForm extends Component {
             }
             
           </Form.Group>
-
+          <h2 class="ui header">Add Tasks to the new Todo:</h2>
      
-      
-          {this.tasks.map(
+      <Grid columns='equal'>
+
+      <Grid.Column>
+      {this.tasks.map(
                 (task,i)=><Task key={i} todo={task} />
-            )}                  
+            )} 
+      </Grid.Column>
+      <Grid.Column>
+      <MessageExampleListProp />
+      </Grid.Column>
+      
+ 
+      </Grid>
+
+                
     
 
   
