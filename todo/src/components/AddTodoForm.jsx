@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form,Button,Grid } from 'semantic-ui-react'
+import { Form,Button,Grid,Modal,Popup } from 'semantic-ui-react'
 import { observable } from "mobx";
 import { observer } from "mobx-react";
 
@@ -14,6 +14,7 @@ class AddTodoForm extends Component {
                         title:"",
                         finished:false
                         }];
+  @observable open = false;
   
   addtask = () => {
     this.tasks.push(
@@ -40,12 +41,18 @@ class AddTodoForm extends Component {
       title:"",
       finished:false
       }];
-
+    this.open=false
   }
 
   
   render() {
     return (
+
+      <Modal
+      open={this.open}
+      trigger={<Button onClick={()=>this.open=true}>Add Todo</Button>}
+      header='Enter Todo name and add Tasks'
+      content={
         <Form >
           <Form.Group  widths='equal'>
             <Form.Input
@@ -76,18 +83,23 @@ class AddTodoForm extends Component {
  
       </Grid>
 
-                
-    
-
-  
-          
-          <Form.Group  widths='equal'>
-            {
-              this.name!=""?<Form.Button content='Add Todo' onClick={this.handleSubmit}/>:null
-            }
-          
-          </Form.Group>          
         </Form>
+      }
+      actions={[
+        <Popup content='Add users to your feed' trigger={
+          <Button 
+          content='Add Todo' 
+          onClick={this.handleSubmit}
+          disabled={this.name==""}
+          />        
+        } />
+
+        
+        ,
+        <Button color="green" onClick={()=>this.open=false}>Cancel</Button> ]}
+    />
+
+
     )
   }
 }

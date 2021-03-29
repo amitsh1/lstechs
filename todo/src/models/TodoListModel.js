@@ -34,11 +34,6 @@ export default class TodoListModel {
   }
 
 
-  @computed
-  get unfinishedTodoCount() {
-    return this.todos.filter(todo => !todo.finished).length;
-  }
-
   @action
   addTodo(title,tasks) {
   const requestOptions = {
