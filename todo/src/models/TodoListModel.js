@@ -6,12 +6,6 @@ export default class TodoListModel {
   @observable todos = [];
   isLoading = true
   constructor(transportLayer, authorStore) {
-    // makeAutoObservable(this)
-    // this.authorStore = authorStore // Store that can resolve authors.
-    // this.transportLayer = transportLayer // Thing that can make server requests.
-    // this.transportLayer.onReceiveTodoUpdate(updatedTodo =>
-    //     this.updateTodoFromServer(updatedTodo)
-    // )
     this.loadTodos()
 }
 
@@ -53,13 +47,10 @@ export default class TodoListModel {
         new TodoModel(response.id,title,tasks,response.date,response.date)
       )
       ); 
-      // .then(data => this.setState({ postId: data.id }));    
-    // this.todos.push();
   }
 
   @action
   editTodo(todo) {
-    // console.log(id,toJS(a));
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -81,7 +72,6 @@ export default class TodoListModel {
 
   @action
   deleteTodo(todo) {
-    // console.log(id,toJS(a));
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
