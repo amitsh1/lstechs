@@ -38,7 +38,7 @@ class TodoList extends React.Component {
         value={this.searchvalue}
         onChange={(e,{value})=>{this.searchvalue=value}}
         />
-        <h2 class="ui header">ToDos:</h2>
+        <h2 className="ui header">ToDos:</h2>
         Number of ToDos: {this.props.store.todos.filter(
         todo=>todo.title.includes(this.searchvalue)
       ).length}
