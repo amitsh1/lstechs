@@ -5,7 +5,7 @@ import { Form } from 'semantic-ui-react'
 const Task = observer(({ todo }) => (
 <Form.Group inline>  
   
-<Form.Input label='Task Name' value={todo.title} onChange={(e,v) => ( todo.title = v.value)}/>
+<Form.Input autoFocus label='Task Name' value={todo.title} onChange={(e,v) => ( todo.title = v.value)}/>
 
 <Form.Checkbox 
 checked={todo.finished}

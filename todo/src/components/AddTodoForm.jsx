@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form,Button,Grid,Modal,Popup } from 'semantic-ui-react'
+import { Form,Button,Grid,Modal,Popup,Segment,Ref } from 'semantic-ui-react'
 import { observable } from "mobx";
 import { observer } from "mobx-react";
 
@@ -15,7 +15,8 @@ class AddTodoForm extends Component {
                         finished:false
                         }];
   @observable open = false;
-  
+  forwardedRef = React.createRef();
+  myRef = React.createRef();
   addtask = () => {
     this.tasks.push(
         {
@@ -50,32 +51,47 @@ class AddTodoForm extends Component {
 
       <Modal
       open={this.open}
-      trigger={<Button onClick={()=>this.open=true}>Add Todo</Button>}
+      trigger={<Button onClick={()=>{
+        this.open=true;
+        setTimeout(
+          ()=>this.forwardedRef.current.getElementsByTagName("input")[0].focus(),
+          30
+        )
+        
+      }}>Add Todo</Button>}
       header='Enter Todo name and add Tasks'
       content={
         <Form >
+          
           <Form.Group  widths='equal'>
+          <Ref innerRef={this.forwardedRef}>
             <Form.Input
               fluid
               label='Todo Name' 
               name='name'
               value={this.name}
               onChange={this.handleChange}
-            />
+              ></Form.Input>
+
+            </Ref>
             {
               this.tasks.slice(-1)[0].title==""?null:<Button fluid onClick={this.addtask} content="Add task" />
             }
             
           </Form.Group>
-          <h2 class="ui header">Add Tasks to the new Todo:</h2>
+
+          <h2 className="ui header">Add Tasks to the new Todo:</h2>
      
       <Grid columns='equal'>
-
+      
       <Grid.Column>
+      <Segment style={{overflow: 'auto', height: "40vh" }}>
       {this.tasks.map(
                 (task,i)=><Task key={i} todo={task} />
             )} 
+       </Segment>
       </Grid.Column>
+     
       <Grid.Column>
       <MessageExampleListProp />
       </Grid.Column>
@@ -86,7 +102,7 @@ class AddTodoForm extends Component {
         </Form>
       }
       actions={[
-        <Popup content='Add users to your feed' trigger={
+        <Popup key="ac1" content='Add users to your feed' trigger={
           <Button 
           content='Add Todo' 
           onClick={this.handleSubmit}
@@ -96,7 +112,7 @@ class AddTodoForm extends Component {
 
         
         ,
-        <Button color="green" onClick={()=>this.open=false}>Cancel</Button> ]}
+        <Button key="ac2" color="green" onClick={()=>this.open=false}>Cancel</Button> ]}
     />
 
 

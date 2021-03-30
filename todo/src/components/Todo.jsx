@@ -36,8 +36,8 @@ const Todo = observer(({ todo,store,color}) => (
     <Card.Content style={{"backgroundColor":color}}>
       <Feed >
         {todo.tasks.map((task,i) => (
-        <Feed.Event >
-        <Checkbox key={i} label={task.title} checked={task.finished} onChange={() => 
+        <Feed.Event key={i}>
+        <Checkbox  label={task.title} checked={task.finished} onChange={() => 
           {
             task.finished = !task.finished;
             store.editTodo(todo);
